@@ -19,6 +19,9 @@ public class HelloServlet extends HttpServlet {
     public void test() {
         System.out.println("Hello Git");
     }
+    public void test1(){
+        System.out.println("Test Git");
+    }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
