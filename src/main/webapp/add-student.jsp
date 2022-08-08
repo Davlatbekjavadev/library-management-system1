@@ -28,52 +28,14 @@
     <div class="col-md-6 offset-3">
 
 
-        <form action="/add-student" method="post" > <%-- enctype="multipart/form-data"--%>
+        <form action="/add-student" method="post" >
 
-<%--            <div class="form-group">--%>
-<%--                <label for="title">Title:</label>--%>
-<%--                <input--%>
-<%--                        id="title"--%>
-<%--                        type="text"--%>
-<%--                        name="title"--%>
-<%--                        class="form-control"--%>
-<%--                        placeholder="Input title..."--%>
-<%--                >--%>
-<%--            </div>--%>
 
             <div class="form-group">
                 <label for="name">Name:</label>
                 <textarea class="form-control" rows="3" id="name" name="name"></textarea>
             </div>
 
-<%-- Authors--%>
-<%--            <div class="form-group">--%>
-<%--                <label for="authorsIds">Authors:</label>--%>
-<%--                <select id="authorsIds"--%>
-<%--                        class="selectpicker form-control"--%>
-<%--                        multiple--%>
-<%--                        aria-label="Please select authors"--%>
-<%--                        data-live-search="true"--%>
-<%--                        name="authorsIds"--%>
-<%--                >--%>
-<%--                    <c:forEach items="${authorList}" var="author">--%>
-<%--                        <option value="${author.getId()}">${author.getFullName()}</option>--%>
-<%--                    </c:forEach>--%>
-<%--                </select>--%>
-<%--            </div>--%>
-
-
-
-<%--Category--%>
-<%--            <div class="form-group">--%>
-<%--                <label for="categoryId">Category:</label>--%>
-<%--                <select required class="form-control" id="categoryId" name="categoryId">--%>
-<%--                    <option selected disabled value="0">Select category:</option>--%>
-<%--                    <c:forEach items="${categoryList}" var="category">--%>
-<%--                        <option value="${category.getId()}">${category.getName()}</option>--%>
-<%--                    </c:forEach>--%>
-<%--                </select>--%>
-<%--            </div>--%>
 
 
             <div class="form-group">
@@ -87,13 +49,6 @@
                 <input class="form-control" id="password" type="number" name="password">
             </div>
 
-<%--    Image--%>
-<%--            <div class="form-group">--%>
-<%--                <label for="image">Upload cover image:</label>--%>
-
-<%--                <input class="form-control-file" id="image" type="file" name="image">--%>
-
-<%--            </div>--%>
 
             <button type="submit" class="btn btn-primary">Saqlash</button>
 

@@ -50,7 +50,7 @@
                 <th>${user.getName()}</th>
                 <th>${user.getPassword()}</th>
                 <th>${user.getEmail()}</th>
-                <th> <a href="/#?id=${user.getId()}">Edit</a></th>
+                <th> <a href="/edit?id=${user.getId()}">Edit</a></th>
                 <th> <a href="/deleteUser?id=${user.getId()}">Delete</a></th>
 
             </tr>
