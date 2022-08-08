@@ -35,17 +35,12 @@ public class UserDao {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public static boolean addNewUser(User user) {
-
         try {
-
             Connection connection = DbConnection.getConnection();
-
             String insertUser = "insert into users (name, email, password) VALUES (?, ?, ?)";
-
 
             PreparedStatement preparedStatement = connection.prepareStatement(insertUser);
 
@@ -54,14 +49,28 @@ public class UserDao {
             preparedStatement.setString(3, user.getPassword());
             int executeUpdate = preparedStatement.executeUpdate();
 
-
-
-
-            return executeUpdate == 1 ;
+            return executeUpdate == 1;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
-
     }
+
+    public static int delete(int id) {
+        int status = 0;
+        try {
+            Connection con = DbConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement("delete from users where id=?");
+            ps.setInt(1, id);
+            status = ps.executeUpdate();
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
+
+
 }

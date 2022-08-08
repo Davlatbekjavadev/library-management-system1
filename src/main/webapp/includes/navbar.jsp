@@ -22,7 +22,7 @@
         <ul class="d-flex">
             <li class="mx-3"><a href="/books">Books</a></li>
             <li class="mx-3"><a href="/issue-return-book">Issue/Return a book</a></li>
-            <li class="mx-3"><a href="/add-student">Students</a></li>
+            <li class="mx-3"><a href="/students">Students</a></li>
             <li class="mx-3"><a href="/reports">Reports</a></li>
         </ul>
     </div>
