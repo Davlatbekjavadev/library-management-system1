@@ -24,11 +24,9 @@
 <section class="container mt-4 ">
 
 
-    <c:if test="${message != null}">
-        <h1>${message}</h1>
-    </c:if>
-
+    <c:if test="${role=='Super Admin'}">
     <a href="/add-admin">+ add new admin</a>
+    </c:if>
     <br><br>
 
 
@@ -38,9 +36,11 @@
             <th>Name</th>
             <th>Password</th>
             <th>Email</th>
+<c:if test="${role=='Super Admin'}">
             <th>Role</th>
             <th>Edit</th>
             <th>Delete</th>
+</c:if>
         </tr>
 
 
@@ -51,10 +51,11 @@
                 <th>${admin.getName()}</th>
                 <th>${admin.getPassword()}</th>
                 <th>${admin.getEmail()}</th>
+                <c:if test="${role=='Super Admin'}">
                 <th>${admin.getRole()}</th>
-                <th> <a href="/edit?id=${admin.getId()}">Edit</a></th>
-                <th> <a href="/deleteUser?id=${admin.getId()}">Delete</a></th>
-
+                <th> <a href="/editAdmin?id=${admin.getId()}">Edit</a></th>
+                <th> <a href="/deleteAdmin?id=${admin.getId()}">Delete</a></th>
+                </c:if>
             </tr>
 
         </c:forEach>

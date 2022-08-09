@@ -48,10 +48,7 @@
             </div>
 
 
-            <div class="form-group">
-                <label >Role:</label>
-                <input class="form-control" name="role">
-            </div>
+
 
             <button type="submit" class="btn btn-primary">Saqlash</button>
 

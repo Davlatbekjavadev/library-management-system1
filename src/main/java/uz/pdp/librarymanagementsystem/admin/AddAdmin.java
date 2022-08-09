@@ -20,7 +20,7 @@ public class AddAdmin extends HttpServlet {
         String name = req.getParameter("name");
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        String role = req.getParameter("role");
+        String role = "Admin";
 
         Admin admin = Admin.builder()
                 .name(name)
