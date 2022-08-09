@@ -17,8 +17,9 @@
 </head>
 
 <body>
-
-<%@include file="includes/navbar.jsp" %>
+<%--<c:if test="${(kalit == 'Super Admin') || (kalit == 'Admin')}">--%>
+    <%@include file="includes/navbar.jsp" %>
+<%--</c:if>--%>
 
 <!--SAYTNI MENYUDAN PASTKI QISMI KONTENTLAR-->
 <section class="container mt-4 ">
@@ -28,8 +29,9 @@
         <h1>${message}</h1>
     </c:if>
 
-    <a href="/add-book">+ add new book</a>
-
+<%--    <c:if test="${(kalit == 'Super Admin') || (kalit == 'Admin')}">--%>
+        <a href="/add-book">+ add new book</a>
+<%--    </c:if>--%>
     <div class="row justify-content-around">
 
         <c:forEach items="${bookList}" var="book">
@@ -43,7 +45,10 @@
                         </a>
                     </c:forEach>
                     <p class="card-text">${book.getCategory().getName()}</p>
-
+<%--                    <c:if test="${(kalit == 'Super Admin') || (kalit == 'Admin')}">--%>
+                        <a href="/updateBook?id=${book.getId()}">Edit</a><br>
+                        <a href="/deleteBook?id=${book.getId()}">Delete</a>
+<%--                    </c:if>--%>
                 </div>
             </div>
         </c:forEach>
@@ -57,13 +62,16 @@
 <footer>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-<%--            <li class="page-item"><a class="page-link" href="#">Previous</a></li>--%>
+            <%--            <li class="page-item"><a class="page-link" href="#">Previous</a></li>--%>
+<%--            <c: forEach items="${bookList}" var = "book">--%>
+<%--                <li class="page-item"><a class="page-link" href="/books?page=1">1</a></li>--%>
+<%--            </c:>--%>
             <li class="page-item"><a class="page-link" href="/books?page=1">1</a></li>
             <li class="page-item"><a class="page-link" href="/books?page=2">2</a></li>
             <li class="page-item"><a class="page-link" href="/books?page=3">3</a></li>
             <li class="page-item"><a class="page-link" href="/books?page=4">4</a></li>
             <li class="page-item"><a class="page-link" href="/books?page=5">5</a></li>
-<%--            <li class="page-item"><a class="page-link"  href="#">Next</a></li>--%>
+            <%--            <li class="page-item"><a class="page-link"  href="#">Next</a></li>--%>
         </ul>
     </nav>
 </footer>

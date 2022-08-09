@@ -1,6 +1,7 @@
-package uz.pdp.librarymanagementsystem.user;
+package uz.pdp.librarymanagementsystem.admin;
 
 import uz.pdp.librarymanagementsystem.db.DbConnection;
+
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,11 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao {
-    public static List<User> getAllUsers() {
+public class AdminDao {
+    public static List<Admin> getAllAdmin() {
         try (Connection connection = DbConnection.getConnection();) {
-            List<User> userList = new ArrayList<>();
-            String query = "select * from users";
+            List<Admin> adminList = new ArrayList<>();
+            String query = "select * from admin";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -21,32 +22,35 @@ public class UserDao {
                 String name = resultSet.getString("name");
                 String email = resultSet.getString("email");
                 String password = resultSet.getString("password");
+                String role = resultSet.getString("role");
 
-                User user = User.builder()
+                Admin admin = Admin.builder()
                         .id(id)
                         .name(name)
                         .email(email)
                         .password(password)
+                        .role(role)
                         .build();
 
-                userList.add(user);
+                adminList.add(admin);
             }
-            return userList;
+            return adminList;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static boolean addNewUser(User user) {
+    public static boolean addNewAdmin(Admin admin) {
         try {
             Connection connection = DbConnection.getConnection();
-            String insertUser = "insert into users (name, email, password) VALUES (?, ?, ?)";
+            String insertUser = "insert into admin (name, email, password,role) VALUES (?, ?, ?,?)";
 
             PreparedStatement preparedStatement = connection.prepareStatement(insertUser);
 
-            preparedStatement.setString(1, user.getName());
-            preparedStatement.setString(2, user.getEmail());
-            preparedStatement.setString(3, user.getPassword());
+            preparedStatement.setString(1, admin.getName());
+            preparedStatement.setString(2, admin.getEmail());
+            preparedStatement.setString(3, admin.getPassword());
+            preparedStatement.setString(4, admin.getRole());
             int executeUpdate = preparedStatement.executeUpdate();
 
             return executeUpdate == 1;
@@ -59,7 +63,7 @@ public class UserDao {
         int status = 0;
         try {
             Connection con = DbConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("delete from users where id=?");
+            PreparedStatement ps = con.prepareStatement("delete from admin where id=?");
             ps.setInt(1, id);
             status = ps.executeUpdate();
 
@@ -71,16 +75,17 @@ public class UserDao {
         return status;
     }
 
-    public static int update(User user) {
+    public static int update(Admin admin) {
         int status = 0;
         try {
             Connection con = DbConnection.getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "update users set name=?,password=?,email=? where id=?");
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getPassword());
-            ps.setString(3, user.getEmail());
-            ps.setLong(4, user.getId());
+                    "update admin set name=?,password=?,email=?,role=? where id=?");
+            ps.setString(1, admin.getName());
+            ps.setString(2, admin.getPassword());
+            ps.setString(3, admin.getEmail());
+            ps.setString(4, admin.getRole());
+            ps.setLong(5, admin.getId());
 
             status = ps.executeUpdate();
 
@@ -92,25 +97,25 @@ public class UserDao {
         return status;
     }
 
-    public static User getEmployeeById(int id) {
-        User user = new User();
+    public static Admin getEmployeeById(int id) {
+        Admin admin = new Admin();
 
         try {
             Connection con = DbConnection.getConnection();
-            PreparedStatement ps = con.prepareStatement("select * from users where id=?");
+            PreparedStatement ps = con.prepareStatement("select * from admin where id=?");
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                user.setId(rs.getLong(1));
-                user.setName(rs.getString(2));
-                user.setEmail(rs.getString(3));
-                user.setPassword(rs.getString(4));
+                admin.setId(rs.getLong(1));
+                admin.setName(rs.getString(2));
+                admin.setEmail(rs.getString(3));
+                admin.setPassword(rs.getString(4));
+                admin.setRole(rs.getString(5));
             }
             con.close();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return user;
+        return admin;
     }
-
 }
