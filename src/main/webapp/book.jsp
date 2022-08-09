@@ -17,8 +17,9 @@
 </head>
 
 <body>
-
-<%@include file="includes/navbar.jsp" %>
+<%--<c:if test="${(kalit == 'Super Admin') || (kalit == 'Admin')}">--%>
+    <%@include file="includes/navbar.jsp" %>
+<%--</c:if>--%>
 
 <!--SAYTNI MENYUDAN PASTKI QISMI KONTENTLAR-->
 <section class="container mt-4 ">
@@ -28,23 +29,26 @@
         <h1>${message}</h1>
     </c:if>
 
-    <a href="/add-book">+ add new book</a>
-
+<%--    <c:if test="${(kalit == 'Super Admin') || (kalit == 'Admin')}">--%>
+        <a href="/add-book">+ add new book</a>
+<%--    </c:if>--%>
     <div class="row justify-content-around">
 
-        <c:forEach items="${bookList}" var="book">
+        <c:forEach items="${bookList}" var="admin">
             <div class="card my-4 text-center shadow col-md-3" style="width: 18rem;">
-                <img src="files/${book.getImgUrl()}" class="card-img-top" alt="${book.getTitle()}">
+                <img src="files/${admin.getImgUrl()}" class="card-img-top" alt="${admin.getTitle()}">
                 <div class="card-body">
-                    <h5 class="card-title">${book.getTitle()}</h5>
-                    <c:forEach items="${book.getAuthors()}" var="author">
+                    <h5 class="card-title">${admin.getTitle()}</h5>
+                    <c:forEach items="${admin.getAuthors()}" var="author">
                         <a href="/authors?id=${author.getId()}">
                             <h6 class="card-title">${author.getFullName()}</h6>
                         </a>
                     </c:forEach>
-                    <p class="card-text">${book.getCategory().getName()}</p>
-<a href="updateBook?id=${book.getId()}">Edit</a><br>
-<a href="/deleteBook?id=${book.getId()}">Delete</a>
+                    <p class="card-text">${admin.getCategory().getName()}</p>
+<%--                    <c:if test="${(kalit == 'Super Admin') || (kalit == 'Admin')}">--%>
+                        <a href="/updateBook?id=${admin.getId()}">Edit</a><br>
+                        <a href="/deleteBook?id=${admin.getId()}">Delete</a>
+<%--                    </c:if>--%>
                 </div>
             </div>
         </c:forEach>
@@ -58,13 +62,13 @@
 <footer>
     <nav aria-label="Page navigation example">
         <ul class="pagination">
-<%--            <li class="page-item"><a class="page-link" href="#">Previous</a></li>--%>
+            <%--            <li class="page-item"><a class="page-link" href="#">Previous</a></li>--%>
             <li class="page-item"><a class="page-link" href="/books?page=1">1</a></li>
             <li class="page-item"><a class="page-link" href="/books?page=2">2</a></li>
             <li class="page-item"><a class="page-link" href="/books?page=3">3</a></li>
             <li class="page-item"><a class="page-link" href="/books?page=4">4</a></li>
             <li class="page-item"><a class="page-link" href="/books?page=5">5</a></li>
-<%--            <li class="page-item"><a class="page-link"  href="#">Next</a></li>--%>
+            <%--            <li class="page-item"><a class="page-link"  href="#">Next</a></li>--%>
         </ul>
     </nav>
 </footer>

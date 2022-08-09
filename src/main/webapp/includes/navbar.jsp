@@ -24,6 +24,7 @@
             <li class="mx-3"><a href="/issue-return-book">Issue/Return a book</a></li>
             <li class="mx-3"><a href="/students">Students</a></li>
             <li class="mx-3"><a href="/reports">Reports</a></li>
+            <li class="mx-3"><a href="/admin">Admins</a></li>
         </ul>
     </div>
     <div class="search">

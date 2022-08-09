@@ -14,22 +14,9 @@ public class ViewUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-//        String pageStr = req.getParameter("page");
-//        int page = 1;
-//        if (pageStr != null) {
-//            page = Integer.parseInt(pageStr);
-//        }
-//        int size = 8;
-
         List<User> userList = UserDao.getAllUsers();
 
-
         req.setAttribute("userList", userList);
-
-//        Boolean added = Boolean.valueOf(req.getParameter("added"));
-//        if (added) {
-//            req.setAttribute("message", "Successfully added!!!");
-//        }
         req.getRequestDispatcher("user.jsp").forward(req, resp);
     }
 }
