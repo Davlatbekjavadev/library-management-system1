@@ -43,7 +43,8 @@
                         </a>
                     </c:forEach>
                     <p class="card-text">${book.getCategory().getName()}</p>
-
+<a href="updateBook?id=${book.getId()}">Edit</a><br>
+<a href="/deleteBook?id=${book.getId()}">Delete</a>
                 </div>
             </div>
         </c:forEach>

@@ -19,6 +19,7 @@ public class HelloServlet extends HttpServlet {
     public void test() {
         System.out.println("Hello Git");
     }
+
     public void test1(){
         System.out.println("Test Git");
     }
