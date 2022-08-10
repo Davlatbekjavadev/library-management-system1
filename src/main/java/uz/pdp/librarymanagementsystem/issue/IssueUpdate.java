@@ -1,4 +1,4 @@
-package uz.pdp.librarymanagementsystem.user;
+package uz.pdp.librarymanagementsystem.issue;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,17 +7,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/students")
-public class ViewUserServlet extends HttpServlet {
+@WebServlet("/issueEdit")
+public class IssueUpdate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        List<User> userList = UserDao.getAllUsers();
-
-        req.setAttribute("userList", userList);
-        req.getRequestDispatcher("user.jsp").forward(req, resp);
+        String sId = req.getParameter("id");
+        Issue issue = Issue.builder()
+                .id(Long.valueOf(sId))
+                .status("false")
+                .build();
+        Dao.update(issue);
+        resp.sendRedirect("/reports");
     }
 }
-

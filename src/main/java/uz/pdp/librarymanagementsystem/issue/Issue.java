@@ -1,4 +1,4 @@
-package uz.pdp.librarymanagementsystem.user;
+package uz.pdp.librarymanagementsystem.issue;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+public class Issue {
     private Long id;
-    private String name;
-    private String password;
-    private String email;
+    private String user;
+    private String data;
     private String book;
+    private String status;
 
 }

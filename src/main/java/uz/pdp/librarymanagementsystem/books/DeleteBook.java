@@ -1,4 +1,4 @@
-package uz.pdp.librarymanagementsystem.user;
+package uz.pdp.librarymanagementsystem.books;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -7,17 +7,18 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
-@WebServlet("/students")
-public class ViewUserServlet extends HttpServlet {
+@WebServlet("/deleteBook")
+public class DeleteBook extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        List<User> userList = UserDao.getAllUsers();
+        String sid = req.getParameter("id");
+        int id = Integer.parseInt(sid);
 
-        req.setAttribute("userList", userList);
-        req.getRequestDispatcher("user.jsp").forward(req, resp);
+            Boolean delete = BookDao.deleteBook(id);
+        resp.sendRedirect("books");
+
+
     }
 }
-
