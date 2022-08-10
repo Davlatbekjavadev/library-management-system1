@@ -270,5 +270,71 @@ public class BookDao {
         return null;
     }
 
+    public static List<Book> getAllBook() {
+        try {
+            ArrayList<Book> bookList = new ArrayList<>();
 
+//          1. CONNECTION OCHAMIZ
+            Connection connection = DbConnection.getConnection();
+
+//        2. GET PREPARED STATEMENT
+
+            String sql = "select b.id,\n" +
+                    "       b.title,\n" +
+                    "       b.\"img_url\",\n" +
+                    "       json_agg(\n" +
+                    "               json_build_object(\n" +
+                    "                       'id', a.id,\n" +
+                    "                       'fullName', a.full_name)) as authors,\n" +
+                    "    json_build_object('id', c.id, 'name', c.name) as category\n" +
+                    "--        c.id                                     as categoryId,\n" +
+                    "--        c.name                                   as categoryName\n" +
+                    "from books b\n" +
+                    "         join books_authors ba on b.id = ba.book_id\n" +
+                    "         join authors a on a.id = ba.author_id\n" +
+                    "         join category c on c.id = b.category_id\n" +
+                    "group by b.id, c.id, c.name, b.title\n" ;
+
+
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+
+
+
+//            3. GET RESULTSET
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+
+                long bookId = resultSet.getLong("id");
+                String title = resultSet.getString("title");
+                Array array = resultSet.getArray("authors");
+                Object categoryObj = resultSet.getObject("category");
+                String imgUrl = resultSet.getString("img_url");
+                Type listType = new TypeToken<Set<Author>>() {
+                }.getType();
+                Set<Author> list = new Gson().fromJson(array.toString(), listType);
+
+                Category category = new Gson().fromJson(categoryObj.toString(), Category.class);
+
+
+                Book book = Book.builder()
+                        .id(bookId)
+                        .title(title)
+                        .authors(list)
+                        .category(category)
+                        .imgUrl(imgUrl)
+                        .build();
+
+                bookList.add(book);
+
+
+            }
+            return bookList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
 }

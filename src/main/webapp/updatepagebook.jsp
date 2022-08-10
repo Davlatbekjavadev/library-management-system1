@@ -5,12 +5,22 @@
 <html>
 <head>
     <title>Update</title>
+
+    <link rel="stylesheet" href="webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css">
+
+    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+    <script src="webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
+
 </head>
 <body>
 <h1>Edit BOOK</h1>
 <br/>
 
-
+<div class="row">
+    <div class="col-md-6 offset-3">
 <form action="/updateBook" method="post" enctype="multipart/form-data">
 
 
@@ -69,5 +79,22 @@
     <input type="submit" value="Saqlash">
 
 </form>
+
+
+</div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#framework').multiselect({
+            nonSelectedText: 'Select Framework',
+            enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            buttonWidth: '400px'
+        });
+    });
+</script>
+
 </body>
 </html>

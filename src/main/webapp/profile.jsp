@@ -38,7 +38,7 @@
                     class="w3-badge w3-right w3-small w3-green">3</span></button>
             <div class="w3-dropdown-content w3-card-4 w3-bar-block" style="width:300px">
 <%--                <a href="/listBookUser" class="w3-bar-item w3-button">Books</a>--%>
-                <a href="/list" class="w3-bar-item w3-button">My Books </a>
+<%--                <a href="/list" class="w3-bar-item w3-button">My Books </a>--%>
                 <%--                <a href="#" class="w3-bar-item w3-button">Men</a>--%>
             </div>
         </div>

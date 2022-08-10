@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao {
+
     public static List<User> getAllUsers() {
         try (Connection connection = DbConnection.getConnection();) {
             List<User> userList = new ArrayList<>();
@@ -76,11 +77,12 @@ public class UserDao {
         try {
             Connection con = DbConnection.getConnection();
             PreparedStatement ps = con.prepareStatement(
-                    "update users set name=?,password=?,email=? where id=?");
+                    "update users set name=?,password=?,email=?, book=?where id=?");
             ps.setString(1, user.getName());
             ps.setString(2, user.getPassword());
             ps.setString(3, user.getEmail());
-            ps.setLong(4, user.getId());
+            ps.setString(4, user.getBook());
+            ps.setLong(5, user.getId());
 
             status = ps.executeUpdate();
 
@@ -105,6 +107,7 @@ public class UserDao {
                 user.setName(rs.getString(2));
                 user.setEmail(rs.getString(3));
                 user.setPassword(rs.getString(4));
+                user.setBook(rs.getString(5));
             }
             con.close();
         } catch (Exception ex) {
@@ -112,5 +115,7 @@ public class UserDao {
         }
         return user;
     }
+
+
 
 }

@@ -56,14 +56,17 @@ public class Login extends HttpServlet {
 
         } else if (role.equals("User")) {
             int b = 0;
+            String book = null;
             for (User user : userList) {
                 if (user.getPassword().equals(password) &&
                         user.getName().equals(name) &&
                         user.getEmail().equals(email)) {
+                    book = user.getBook();
                     b = 1;
                 }
             }
             if (b == 1) {
+                req.setAttribute("book",book);
                 req.getRequestDispatcher("profile.jsp").include(req, resp);
 
             } else {
